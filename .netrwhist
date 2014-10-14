@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/ankeet/Library/Application Support/Steam/config'
-let g:netrw_dirhist_2='/Users/ankeet/Downloads/rubytorrent-0.3/rubytorrent'
-let g:netrw_dirhist_3='/Users/ankeet/Workspace/CMSC422/cmsc422-p1/data'
-let g:netrw_dirhist_4='/Users/ankeet/.weather'
-let g:netrw_dirhist_5='/Users/ankeet/Workspace/securemd/byrd'
-let g:netrw_dirhist_6='/Users/ankeet/Workspace/veewee/definitions/debian-wheezy'
