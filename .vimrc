@@ -50,9 +50,13 @@ set hidden
 " Then there's dumbass weird quirks like this. Tab maps to <C-i> so there is
 " no fkn <C-Tab>. And then the C-S-i mapping doesn't work for who knows what
 " reason, so rn i cycle tabs forward with Tab and don't cycle backwards.
+""" MY Key bindings
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
+map <leader>g 
 nnoremap - :Unite file -no-split -start-insert<CR>
+
+" speedier file search; vimproc is used to run file_rec/async in the bg
 "nnoremap - :Unite file_rec/async -no-split -start-insert<cr>
 
 "
@@ -63,25 +67,25 @@ if exists('g:loaded_acp')
     endif
     autocmd FileType unite call s:unite_my_settings()
     function! s:unite_my_settings()"{{{
-"        " Overwrite settings.
-    nmap <buffer> <ESC>      <Plug>(unite_exit)
-    imap <buffer> <C-l>      <Plug>(unite_exit)
-    nmap <buffer> <C-l>      <Plug>(unite_exit)
-    imap <buffer> <C-c>      <Plug>(unite_exit)
-    nmap <buffer> <C-c>      <Plug>(unite_exit)
-    "imap <buffer> jj      <Plug>(unite_insert_leave)
-    imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+    " Overwrite settings.
+        nmap <buffer> <ESC>      <Plug>(unite_exit)
+        imap <buffer> <C-l>      <Plug>(unite_exit)
+        nmap <buffer> <C-l>      <Plug>(unite_exit)
+        imap <buffer> <C-c>      <Plug>(unite_exit)
+        nmap <buffer> <C-c>      <Plug>(unite_exit)
+        "imap <buffer> jj      <Plug>(unite_insert_leave)
+        imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
 
-                    "Changing the deafult tab:
-    "<Tab>       i_<Plug>(unite_choose_action)
-    imap <buffer> <TAB> <Plug>(unite_select_next_line)
-    imap <buffer> <s-TAB> <Plug>(unite_select_previous_line)
-    map <buffer> <TAB> <c-w><c-w>
-    map <buffer><c-Cr>   <Plug>(unite_choose_action)
-    imap <buffer><c-Cr>  <Plug>(unite_choose_action)
-    " Runs "split" action by <C-s>.
-    map <silent><buffer><expr> <Cr>    unite#do_action('tabswitch')
-    map <silent><buffer><expr> <C-s>   unite#do_action('vsplitswitch')
-    map <silent><buffer><expr> <C-h>   unite#do_action('splitswitch')
+                        "Changing the deafult tab:
+        "<Tab>       i_<Plug>(unite_choose_action)
+        imap <buffer> <TAB> <Plug>(unite_select_next_line)
+        imap <buffer> <s-TAB> <Plug>(unite_select_previous_line)
+        map <buffer> <TAB> <c-w><c-w>
+        map <buffer><c-Cr>   <Plug>(unite_choose_action)
+        imap <buffer><c-Cr>  <Plug>(unite_choose_action)
+        " Runs "split" action by <C-s>.
+        map <silent><buffer><expr> <Cr>    unite#do_action('tabswitch')
+        map <silent><buffer><expr> <C-s>   unite#do_action('vsplitswitch')
+        map <silent><buffer><expr> <C-h>   unite#do_action('splitswitch')
     endfunction"}}}
 
