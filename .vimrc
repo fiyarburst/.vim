@@ -42,7 +42,6 @@ let g:airline_powerline_fonts = 0
 " and i guess i should probably putp documentation about how all my various plugins work.
 
 " Setting up eclim http://eclim.org/install.html
-
 filetype plugin on 
 set hidden
 " Seriously, it's difficult to build up longer workflows because of how much
@@ -50,11 +49,22 @@ set hidden
 " Then there's dumbass weird quirks like this. Tab maps to <C-i> so there is
 " no fkn <C-Tab>. And then the C-S-i mapping doesn't work for who knows what
 " reason, so rn i cycle tabs forward with Tab and don't cycle backwards.
+"
+
+""" DEFAULT key bindings
+" have indent guides installed with default mapping
+" map <leader>ig <Plug>IndentGuidesToggle
+" <S-z>z apparently saves and quits automatically by default
+
+
 """ MY Key bindings
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
-map <leader>g 
+map <C-s> :w<CR>
+map <leader>s :w!<CR>
+nmap <leader>ww :bclose<CR>
 nnoremap - :Unite file -no-split -start-insert<CR>
+
 
 " speedier file search; vimproc is used to run file_rec/async in the bg
 "nnoremap - :Unite file_rec/async -no-split -start-insert<cr>
@@ -88,4 +98,3 @@ if exists('g:loaded_acp')
         map <silent><buffer><expr> <C-s>   unite#do_action('vsplitswitch')
         map <silent><buffer><expr> <C-h>   unite#do_action('splitswitch')
     endfunction"}}}
-
