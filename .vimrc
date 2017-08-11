@@ -64,7 +64,7 @@ map <C-s> :w<CR>
 map <leader>s :w!<CR>
 nmap <leader>ww :bclose<CR>
 nnoremap - :Unite file -no-split -start-insert<CR>
-
+map ; :
 
 " speedier file search; vimproc is used to run file_rec/async in the bg
 "nnoremap - :Unite file_rec/async -no-split -start-insert<cr>
