@@ -1,11 +1,12 @@
-
 "Remember, set variable=x <- no spaces!
 set nocompatible "get your arrow keys and things back from the default vi-like mode
 " set showcmd - shows <Leader>key, which is \ by default.
 set showcmd
 let mapleader = ','
-set backspace=indent,eol,start "backspace is important,and i think eol makes it work past line ends
-set nu " nuuuuu
+set backspace=indent,eol,start
+ "backspace is important,and i think eol makes it work past line ends
+set nu
+ " nuuuuu
 set expandtab
 set tabstop=4
 set sw=4 " shiftwidth is for autoindenting/shifting. both are needed by indent_guides
@@ -23,10 +24,9 @@ execute pathogen#infect('bundle/{}', '/Users/ankeet.presswala/linux_dotfiles/.vi
 set t_Co=256
 let g:solarized_termcolors=256
 "sets the default color scheme to not use superdark colors. 
-set background=dark
 syntax enable
-"colorscheme zenburn
-"colorscheme tir_black
+set background=dark
+"colorscheme shine
 
 """" indent_guides settings
 let g:indent_guides_start_level=1
@@ -39,11 +39,13 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
 
+set maxmempattern=8000
 " and i guess i should probably putp documentation about how all my various plugins work.
 
 " Setting up eclim http://eclim.org/install.html
 filetype plugin on 
 set hidden
+set incsearch
 " Seriously, it's difficult to build up longer workflows because of how much
 " more manually I have to do everything. jfc 
 " Then there's dumbass weird quirks like this. Tab maps to <C-i> so there is
@@ -58,6 +60,7 @@ set hidden
 
 
 """ MY Key bindings
+nnoremap ; :
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
 map <C-s> :w<CR>
@@ -98,3 +101,31 @@ if exists('g:loaded_acp')
         map <silent><buffer><expr> <C-s>   unite#do_action('vsplitswitch')
         map <silent><buffer><expr> <C-h>   unite#do_action('splitswitch')
     endfunction"}}}
+
+
+" macros!
+let @o="zO"
+let @p="$zf%"
+
+"dbext https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
+
+let g:dbext_default_profile_Notes = 'type=SQLITE:SQLITE_bin=/usr/local/bin/sqlite3:dbname=/Users/ankeet.presswala/Library/Group\ Containers/group.com.apple.notes/NoteStore.sqlite'
+let g:dbext_default_profile='Notes'
+
+" AirlineThemes that i like
+" - pink
+" hybrid base16
+" - bluegreen
+" lucius monochrome vice base16_londontube base16_shapeshifter cool
+" - red blue black
+" zenburn serene simple base16_google 
+" - brown grey blue
+" base16_mocha base16_summerfruit base16_tomorrow
+"
+
+"let g:airline_theme = 'hybrid' 
+let g:airline_theme = 'base16_tomorrow'
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }
