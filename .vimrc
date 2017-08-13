@@ -60,7 +60,6 @@ set incsearch
 
 
 """ MY Key bindings
-nnoremap ; :
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
 map <C-s> :w<CR>
