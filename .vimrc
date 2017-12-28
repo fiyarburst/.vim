@@ -45,6 +45,8 @@ set maxmempattern=8000
 " Setting up eclim http://eclim.org/install.html
 filetype plugin on 
 set hidden
+set ignorecase
+set smartcase
 set incsearch
 " Seriously, it's difficult to build up longer workflows because of how much
 " more manually I have to do everything. jfc 
