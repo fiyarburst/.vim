@@ -7,3 +7,24 @@
 [submodule "bundle/vim-colors-solarized"]
 	path = bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = git://github.com/vim-syntastic/syntastic
+[submodule "vim-polyglot"]
+	path = vim-polyglot
+	url = git://github.com/sheerun/vim-polyglot
+[submodule "bundle/vimproc.vim"]
+	path = bundle/vimproc.vim
+	url = git://github.com/Shougo/vimproc.vim
+[submodule "bundle/Zenburn"]
+	path = bundle/Zenburn
+	url = git://github.com/jnurmine/Zenburn
+[submodule "bundle/vim-vinegar"]
+	path = bundle/vim-vinegar
+	url = git://github.com/tpope/vim-vinegar
+[submodule "bundle/vim-bookmarks"]
+	path = bundle/vim-bookmarks
+	url = git://github.com/MattesGroeger/vim-bookmarks
+[submodule "bundle/unite.vim"]
+	path = bundle/unite.vim
+	url = git://github.com/Shougo/unite.vim
