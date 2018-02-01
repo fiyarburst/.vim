@@ -14,9 +14,8 @@ set hlsearch    "can achieve this with command Nohl nohlsearch
 set directory=~/.vim/swap//,/tmp/vim/swap//
 
 """" Plugins
-" pacman  <- lol did i write this when i still used gentoo
 runtime autoload/pathogen.vim
-execute pathogen#infect('bundle/{}', '/Users/ankeet.presswala/linux_dotfiles/.vim/bundle/{}')
+execute pathogen#infect('bundle/{}', $HOME+'/.vim/bundle/{}')
 
 
 """" Colors
@@ -26,7 +25,7 @@ let g:solarized_termcolors=256
 "sets the default color scheme to not use superdark colors. 
 syntax enable
 set background=dark
-"colorscheme shine
+colorscheme Zenburn
 
 """" indent_guides settings
 let g:indent_guides_start_level=1
@@ -42,14 +41,11 @@ let g:airline_powerline_fonts = 0
 set maxmempattern=8000
 " and i guess i should probably putp documentation about how all my various plugins work.
 
-" Setting up eclim http://eclim.org/install.html
 filetype plugin on 
 set hidden
 set ignorecase
 set smartcase
 set incsearch
-" Seriously, it's difficult to build up longer workflows because of how much
-" more manually I have to do everything. jfc 
 " Then there's dumbass weird quirks like this. Tab maps to <C-i> so there is
 " no fkn <C-Tab>. And then the C-S-i mapping doesn't work for who knows what
 " reason, so rn i cycle tabs forward with Tab and don't cycle backwards.
@@ -62,13 +58,20 @@ set incsearch
 
 
 """ MY Key bindings
-nmap <leader>l :bnext<CR>
-nmap <leader>h :bprevious<CR>
-map <C-s> :w<CR>
-map <leader>s :w!<CR>
-nmap <leader>ww :bclose<CR>
+" macros!
+let @o="zO"
+let @p="$zf%"
+noremap <space> viw
+noremap <S-j> ddp
+noremap <S-k> ddkkp
+noremap <C-s> :w<CR>
+noremap ; : 
+noremap <leader>s :w!<CR>
+inoremap <c-u> <esc>viwUea
+nnoremap <leader>l :bnext<CR>
+nnoremap <leader>h :bprevious<CR>
+nnoremap <leader>ww :bclose<CR>
 nnoremap - :Unite file -no-split -start-insert<CR>
-map ; :
 
 " speedier file search; vimproc is used to run file_rec/async in the bg
 "nnoremap - :Unite file_rec/async -no-split -start-insert<cr>
@@ -104,9 +107,6 @@ if exists('g:loaded_acp')
     endfunction"}}}
 
 
-" macros!
-let @o="zO"
-let @p="$zf%"
 
 "dbext https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
 
@@ -124,9 +124,12 @@ let g:dbext_default_profile='Notes'
 " base16_mocha base16_summerfruit base16_tomorrow
 "
 
-"let g:airline_theme = 'hybrid' 
-let g:airline_theme = 'base16_tomorrow'
+let g:airline_theme = 'serene' 
+"let g:airline_theme = 'base16_tomorrow'
 augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
+
+" Snippets
+let g:UltiSnipsExpandTrigger="<tab>"
