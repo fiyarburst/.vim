@@ -62,8 +62,8 @@ set incsearch
 let @o="zO"
 let @p="$zf%"
 noremap <space> viw
-noremap <S-j> ddp
-noremap <S-k> ddkkp
+noremap <C-j> ddp
+noremap <C-k> ddkkp
 noremap <C-s> :w<CR>
 noremap ; : 
 noremap <leader>s :w!<CR>
