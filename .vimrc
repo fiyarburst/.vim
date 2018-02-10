@@ -133,3 +133,5 @@ augroup END " }
 
 " Snippets
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsSnippetsDir="~/.vim/bundle/vim-snippets"
+set runtimepath+="~/.vim/bundle/vim-snippets/snippets"
