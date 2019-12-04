@@ -5,8 +5,7 @@ set showcmd
 let mapleader = ','
 set backspace=indent,eol,start
  "backspace is important,and i think eol makes it work past line ends
-set nu
- " nuuuuu
+set nu rnu
 set expandtab
 set tabstop=4
 set sw=4 " shiftwidth is for autoindenting/shifting. both are needed by indent_guides
@@ -25,7 +24,7 @@ let g:solarized_termcolors=256
 "sets the default color scheme to not use superdark colors. 
 syntax enable
 set background=dark
-colorscheme Zenburn
+colorscheme slate
 
 """" indent_guides settings
 let g:indent_guides_start_level=1
@@ -74,7 +73,12 @@ nnoremap <leader>ww :bclose<CR>
 nnoremap - :Unite file -no-split -start-insert<CR>
 
 " speedier file search; vimproc is used to run file_rec/async in the bg
-"nnoremap - :Unite file_rec/async -no-split -start-insert<cr>
+nnoremap - :Unite file_rec/async -no-split -start-insert<cr>
+
+if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts='--nocolor --nogroup -S -C4'
+endif
 
 "
 "  " Disable AutoComplPop plugin - make sure ACP is loaded before Unite.vim.
@@ -132,6 +136,9 @@ augroup reload_vimrc " {
 augroup END " }
 
 " Snippets
-let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/vim-snippets"
 set runtimepath+="~/.vim/bundle/vim-snippets/snippets"
+
+set undofile
+set undodir=~/.vim/undodir
