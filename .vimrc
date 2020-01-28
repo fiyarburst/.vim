@@ -2,6 +2,7 @@
 set nocompatible "get your arrow keys and things back from the default vi-like mode
 " set showcmd - shows <Leader>key, which is \ by default.
 set showcmd
+set relativenumber
 let mapleader = ','
 set backspace=indent,eol,start
  "backspace is important,and i think eol makes it work past line ends
@@ -11,11 +12,13 @@ set tabstop=4
 set sw=4 " shiftwidth is for autoindenting/shifting. both are needed by indent_guides
 set hlsearch    "can achieve this with command Nohl nohlsearch
 set directory=~/.vim/swap//,/tmp/vim/swap//
+set ttyfast
+set lazyredraw
+set wildmenu
 
 """" Plugins
 runtime autoload/pathogen.vim
 execute pathogen#infect('bundle/{}', $HOME+'/.vim/bundle/{}')
-
 
 """" Colors
 " need 256-colors, which screen/mintty sometimes screw up
@@ -60,6 +63,11 @@ set incsearch
 " macros!
 let @o="zO"
 let @p="$zf%"
+augroup ftrustlang
+    autocmd FileType rust compiler cargo  
+    command Debugrust make run
+    autocmd FileType rust map B :Debugrust
+augroup end
 noremap <space> viw
 noremap <C-j> ddp
 noremap <C-k> ddkkp
@@ -142,3 +150,8 @@ set runtimepath+="~/.vim/bundle/vim-snippets/snippets"
 
 set undofile
 set undodir=~/.vim/undodir
+let g:UltiSnipsExpandTrigger="<tab>"
+
+" sr writes file with sudo
+nnoremap <leader>sr :w !sudo tee %<CR>
+
