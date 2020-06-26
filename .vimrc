@@ -29,8 +29,7 @@ syntax enable
 set background=dark
 colorscheme slate
 
-"""" indent_guides settings
-let g:indent_guides_start_level=1
+"""" indent_guides settings let g:indent_guides_start_level=1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=lightgrey  
@@ -73,51 +72,12 @@ noremap <C-j> ddp
 noremap <C-k> ddkkp
 noremap <C-s> :w<CR>
 noremap ; : 
+noremap \ :Autoformat<CR>
 noremap <leader>s :w!<CR>
 inoremap <c-u> <esc>viwUea
 nnoremap <leader>l :bnext<CR>
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>ww :bclose<CR>
-nnoremap - :Unite file -no-split -start-insert<CR>
-
-" speedier file search; vimproc is used to run file_rec/async in the bg
-nnoremap - :Unite file_rec/async -no-split -start-insert<cr>
-
-if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts='--nocolor --nogroup -S -C4'
-endif
-
-"
-"  " Disable AutoComplPop plugin - make sure ACP is loaded before Unite.vim.
-if exists('g:loaded_acp')
-    autocmd bufenter unite AcpLock
-    autocmd bufleave unite AcpUnlock
-    endif
-    autocmd FileType unite call s:unite_my_settings()
-    function! s:unite_my_settings()"{{{
-    " Overwrite settings.
-        nmap <buffer> <ESC>      <Plug>(unite_exit)
-        imap <buffer> <C-l>      <Plug>(unite_exit)
-        nmap <buffer> <C-l>      <Plug>(unite_exit)
-        imap <buffer> <C-c>      <Plug>(unite_exit)
-        nmap <buffer> <C-c>      <Plug>(unite_exit)
-        "imap <buffer> jj      <Plug>(unite_insert_leave)
-        imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-
-                        "Changing the deafult tab:
-        "<Tab>       i_<Plug>(unite_choose_action)
-        imap <buffer> <TAB> <Plug>(unite_select_next_line)
-        imap <buffer> <s-TAB> <Plug>(unite_select_previous_line)
-        map <buffer> <TAB> <c-w><c-w>
-        map <buffer><c-Cr>   <Plug>(unite_choose_action)
-        imap <buffer><c-Cr>  <Plug>(unite_choose_action)
-        " Runs "split" action by <C-s>.
-        map <silent><buffer><expr> <Cr>    unite#do_action('tabswitch')
-        map <silent><buffer><expr> <C-s>   unite#do_action('vsplitswitch')
-        map <silent><buffer><expr> <C-h>   unite#do_action('splitswitch')
-    endfunction"}}}
-
 
 
 "dbext https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
