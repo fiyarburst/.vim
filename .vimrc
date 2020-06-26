@@ -58,11 +58,28 @@ set incsearch
 " <S-z>z apparently saves and quits automatically by default
 
 
+""" python syntax
+set textwidth=120
+let g:formatters_python = ['black', 'yapf', 'autopep8']
+let g:syntastic_python_checkers = ['black',  'pyflakes']
+let g:formatdef_black = '"black -q ".(&textwidth ? "-l".&textwidth : "")." -"'
+let g:syntastic_python_pylint_post_args="--max-line-length=&textwidth"
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 """ MY Key bindings
 " macros!
 let @o="zO"
 let @p="$zf%"
 augroup ftrustlang
+    "well this doesn't work
     autocmd FileType rust compiler cargo  
     command Debugrust make run
     autocmd FileType rust map B :Debugrust
