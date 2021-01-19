@@ -1,16 +1,16 @@
 "Remember, set variable=x <- no spaces!
-set nocompatible "get your arrow keys and things back from the default vi-like mode
+set nocompatible "get your arrow keys and things back from the default vi-like mode. You usually want to put this at the start.
 " set showcmd - shows <Leader>key, which is \ by default.
 set showcmd
-set relativenumber
+set number relativenumber
 let mapleader = ','
 set backspace=indent,eol,start
  "backspace is important,and i think eol makes it work past line ends
-set nu rnu
 set expandtab
 set tabstop=4
 set sw=4 " shiftwidth is for autoindenting/shifting. both are needed by indent_guides
-set hlsearch    "can achieve this with command Nohl nohlsearch
+
+
 set directory=~/.vim/swap//,/tmp/vim/swap//
 set ttyfast
 set lazyredraw
@@ -47,6 +47,8 @@ set hidden
 set ignorecase
 set smartcase
 set incsearch
+set hlsearch
+nnoremap <esc><esc> :nohls<CR>
 " Then there's dumbass weird quirks like this. Tab maps to <C-i> so there is
 " no fkn <C-Tab>. And then the C-S-i mapping doesn't work for who knows what
 " reason, so rn i cycle tabs forward with Tab and don't cycle backwards.
@@ -61,7 +63,7 @@ set incsearch
 """ python syntax
 set textwidth=120
 let g:formatters_python = ['black', 'yapf', 'autopep8']
-let g:syntastic_python_checkers = ['black',  'pyflakes']
+let g:syntastic_python_checkers = ['black']  " ,  'pyflakes']
 let g:formatdef_black = '"black -q ".(&textwidth ? "-l".&textwidth : "")." -"'
 let g:syntastic_python_pylint_post_args="--max-line-length=&textwidth"
 
@@ -95,7 +97,8 @@ inoremap <c-u> <esc>viwUea
 nnoremap <leader>l :bnext<CR>
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>ww :bclose<CR>
-
+" TODO: currently, nocompatible keeps cedit on, which makes Ctrl-F a global mapping to cmdwin.
+" "         we overwrite C-f in insert mode, but in command mode, maybe there's a better shortcut? 
 
 "dbext https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
 
