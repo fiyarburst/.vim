@@ -10,6 +10,7 @@ set expandtab
 set tabstop=4
 set sw=4 " shiftwidth is for autoindenting/shifting. both are needed by indent_guides
 set hlsearch    "can achieve this with command Nohl nohlsearch
+noremap <C-c> :nohlsearch<CR>
 set directory=~/.vim/swap//,/tmp/vim/swap//
 
 """" Plugins
@@ -113,7 +114,7 @@ if exists('g:loaded_acp')
 
 
 "dbext https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
-
+let g:ranger_replace_netrw = 1
 let g:dbext_default_profile_Notes = 'type=SQLITE:SQLITE_bin=/usr/local/bin/sqlite3:dbname=/Users/ankeet.presswala/Library/Group\ Containers/group.com.apple.notes/NoteStore.sqlite'
 let g:dbext_default_profile='Notes'
 
@@ -142,3 +143,5 @@ set runtimepath+="~/.vim/bundle/vim-snippets/snippets"
 
 set undofile
 set undodir=~/.vim/undodir
+
+let g:syntastic_python_python_exec = 'python3'
