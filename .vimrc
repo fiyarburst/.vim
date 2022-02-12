@@ -1,4 +1,5 @@
 "Remember, set variable=x <- no spaces!
+" set verbose=1
 set nocompatible "get your arrow keys and things back from the default vi-like mode
 " set showcmd - shows <Leader>key, which is \ by default.
 set showcmd
@@ -16,6 +17,7 @@ set directory=~/.vim/swap//,/tmp/vim/swap//
 """" Plugins
 runtime autoload/pathogen.vim
 execute pathogen#infect('bundle/{}', $HOME+'/.vim/bundle/{}')
+Helptags
 
 
 """" Colors
@@ -145,3 +147,12 @@ set undofile
 set undodir=~/.vim/undodir
 
 let g:syntastic_python_python_exec = 'python3'
+
+" Clojure
+let g:rainbow_active = 1
+
+" tidal
+autocmd FileType tidal setlocal commentstring=--\ %s
+
+" turn on autosave
+"  autocmd TextChanged,TextChangedI <buffer> silent write
