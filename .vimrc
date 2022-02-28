@@ -156,3 +156,8 @@ autocmd FileType tidal setlocal commentstring=--\ %s
 
 " turn on autosave
 "  autocmd TextChanged,TextChangedI <buffer> silent write
+"
+highlight DiffAdd    cterm=NONE ctermfg=0 ctermbg=2
+highlight DiffDelete cterm=NONE ctermfg=0 ctermbg=1
+highlight DiffChange cterm=NONE ctermfg=0 ctermbg=6
+highlight DiffText   cterm=NONE ctermfg=0 ctermbg=6
