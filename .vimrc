@@ -18,10 +18,12 @@ set ttyfast
 set lazyredraw
 set wildmenu
 
+
+
 """" Plugins
-runtime autoload/pathogen.vim
-execute pathogen#infect('bundle/{}', $HOME+'/.vim/bundle/{}')
-Helptags
+"runtime autoload/pathogen.vim
+"execute pathogen#infect('bundle/{}', $HOME+'/.vim/bundle/{}')
+" helptags
 
 """" Colors
 " need 256-colors, which screen/mintty sometimes screw up
@@ -100,6 +102,8 @@ inoremap <c-u> <esc>viwUea
 nnoremap <leader>l :bnext<CR>
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>ww :bclose<CR>
+noremap <leader>t :TagbarToggle<CR>
+
 " TODO: currently, nocompatible keeps cedit on, which makes Ctrl-F a global mapping to cmdwin.
 " "         we overwrite C-f in insert mode, but in command mode, maybe there's a better shortcut? 
 
@@ -138,6 +142,9 @@ let g:syntastic_python_python_exec = 'python3'
 
 " Clojure
 let g:rainbow_active = 1
+
+let g:tagbar_compact = 2
+
 
 " tidal
 autocmd FileType tidal setlocal commentstring=--\ %s

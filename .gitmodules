@@ -73,3 +73,9 @@
 [submodule "bundle/vim-prettier"]
 	path = bundle/vim-prettier
 	url = https://github.com/prettier/vim-prettier
+[submodule "pack/bundle/opt/vim-scriptease"]
+	path = pack/bundle/opt/vim-scriptease
+	url = https://github.com/tpope/vim-scriptease
+[submodule "pack/minpac/start/minpac"]
+	path = pack/minpac/start/minpac
+	url = https://github.com/k-takata/minpac.git
