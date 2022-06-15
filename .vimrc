@@ -21,8 +21,20 @@ set wildmenu
 
 
 """" Plugins
-"runtime autoload/pathogen.vim
-"execute pathogen#infect('bundle/{}', $HOME+'/.vim/bundle/{}')
+packadd minpac
+call minpac#init()
+call minpac#add('tpope/vim-unimpaired')
+call minpac#add('mbbill/undotree')
+call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('preservim/tagbar')
+call minpac#add('junegunn/fzf', {'do': {-> system('fzf#install()')}})
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('nathanaelkane/vim-indent-guides')
+nnoremap <C-p> :<C-u>FZF<CR>
+
+" to install plugins or update, :call minpac#update(). needs to be bootstrapped with minpac
+
 " helptags
 
 """" Colors
