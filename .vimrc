@@ -1,174 +1,85 @@
-"Remember, set variable=x <- no spaces!
-" set verbose=1
-set nocompatible "get your arrow keys and things back from the default vi-like mode
-" set showcmd - shows <Leader>key, which is \ by default.
-set showcmd
-set number relativenumber
+" Notes
+"
+" Plugins are managed with minpac. to install plugins or update, type
+" :call minpac#update(). This means minpac needs to be bootstrapped, which we do with
+" vim 8's native :packadd command.
+"
+" check out tpope/vim-sensible which contains a bunch of defaults. Notably, 
+" vim-sensible contains incsearch and a mapping to clear hls with <C-L>.
+"
+" I've removed all the formatters and syntastic stuff from my original config, 
+" which included formatters for ['black', 'yapf', 'autopep8'] and used the
+" textwidth i set (120 here) for linelength checks.
+"
+" I had <leader>l/h/ww for :bnext/bprevious/bclose respectively, does a plugin I've installed do this sort of thing for me already?
+
+" Defaults. Includes drawing, ; for : commands, my comma leader, indenting editing and textwidth settings.
+set ttyfast lazyredraw showcmd number relativenumber
+set shiftwidth=4 tabstop=4 expandtab
 let mapleader = ','
-set backspace=indent,eol,start
- "backspace is important,and i think eol makes it work past line ends
-set expandtab
-set tabstop=4
-set sw=4 " shiftwidth is for autoindenting/shifting. both are needed by indent_guides
-set hlsearch    "can achieve this with command Nohl nohlsearch
-noremap <C-c> :nohlsearch<CR>
+noremap ; :
 
-set directory=~/.vim/swap//,/tmp/vim/swap//
-set ttyfast
-set lazyredraw
-set wildmenu
+set directory=~/.vim/swap/,/tmp/vim/swap/
+set maxmempattern=8000
 
+set smartcase
+set textwidth=120
 
+" Colors
+colorscheme peachpuff
 
-"""" Plugins
-packadd minpac
-call minpac#init()
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('mbbill/undotree')
-call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
-call minpac#add('k-takata/minpac', {'type': 'opt'})
-call minpac#add('preservim/tagbar')
-call minpac#add('junegunn/fzf', {'do': {-> system('fzf#install()')}})
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('nathanaelkane/vim-indent-guides')
-nnoremap <C-p> :<C-u>FZF<CR>
-
-" to install plugins or update, :call minpac#update(). needs to be bootstrapped with minpac
-
-" helptags
-
-"""" Colors
-" need 256-colors, which screen/mintty sometimes screw up
-set t_Co=256
-let g:solarized_termcolors=256
-"sets the default color scheme to not use superdark colors. 
-syntax enable
-set background=dark
-colorscheme slate
-
-"""" indent_guides settings let g:indent_guides_start_level=1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=lightgrey  
-let g:indent_guides_guide_size= 1
-let g:indent_guides_enable_on_vim_startup=0
-set laststatus=2
+" Airline
+let g:airline_theme = 'behelit'
+" let g:airline_theme = 'biogoo'
+" atomic is minimal
+" also deus, 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
 
-set maxmempattern=8000
-" and i guess i should probably putp documentation about how all my various plugins work.
+""" Plugins
+packadd minpac
+call minpac#init()
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-sensible')
+" vim-sensible also comes with matchit.vim, which adds multi-level cycling (eg if/else/endif)
+" and backwards cycling. Can pair nicely with zf% for folding
+call minpac#add('tpope/vim-unimpaired')
+call minpac#add('mbbill/undotree')
+call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
+call minpac#add('preservim/tagbar')
+call minpac#add('junegunn/fzf', {'do': {-> system('fzf#install()')}})
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('vim-airline/vim-airline-themes')
+call minpac#add('github/copilot.vim')
 
-filetype plugin on 
-set hidden
-set ignorecase
-set smartcase
-set incsearch
-set hlsearch
-nnoremap <esc><esc> :nohls<CR>
-" Then there's dumbass weird quirks like this. Tab maps to <C-i> so there is
-" no fkn <C-Tab>. And then the C-S-i mapping doesn't work for who knows what
-" reason, so rn i cycle tabs forward with Tab and don't cycle backwards.
-"
+"Bclose is required for ranger.vim
+call minpac#add('francoiscabrol/ranger.vim')
+call minpac#add('rbgrouleff/bclose.vim')
+nnoremap <C-p> :<C-u>FZF<CR>
 
-""" DEFAULT key bindings
-" have indent guides installed with default mapping
-" map <leader>ig <Plug>IndentGuidesToggle
-" <S-z>z apparently saves and quits automatically by default
-
-
-""" python syntax
-set textwidth=120
-let g:formatters_python = ['black', 'yapf', 'autopep8']
-let g:syntastic_python_checkers = ['black']  " ,  'pyflakes']
-let g:formatdef_black = '"black -q ".(&textwidth ? "-l".&textwidth : "")." -"'
-let g:syntastic_python_pylint_post_args="--max-line-length=&textwidth"
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-""" MY Key bindings
-" macros!
-let @o="zO"
-let @p="$zf%"
-augroup ftrustlang
-    "well this doesn't work
-    autocmd FileType rust compiler cargo  
-    command Debugrust make run
-    autocmd FileType rust map B :Debugrust
-augroup end
-noremap <space> viw
+" Line manipulation
 noremap <C-j> ddp
 noremap <C-k> ddkkp
-noremap <C-s> :w<CR>
-noremap ; : 
-noremap \ :Autoformat<CR>
-noremap <leader>s :w!<CR>
-inoremap <c-u> <esc>viwUea
-nnoremap <leader>l :bnext<CR>
-nnoremap <leader>h :bprevious<CR>
-nnoremap <leader>ww :bclose<CR>
+
+" Indent Guides
+call minpac#add('nathanaelkane/vim-indent-guides')
+map <leader>ig <Plug>IndentGuidesToggle
+let g:indent_guides_start_level = 1
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+
+
+" Tagbar
 noremap <leader>t :TagbarToggle<CR>
 
-" TODO: currently, nocompatible keeps cedit on, which makes Ctrl-F a global mapping to cmdwin.
-" "         we overwrite C-f in insert mode, but in command mode, maybe there's a better shortcut? 
-
-"dbext https://mutelight.org/dbext-the-last-sql-client-youll-ever-need
+" Ranger
 let g:ranger_replace_netrw = 1
-let g:dbext_default_profile_Notes = 'type=SQLITE:SQLITE_bin=/usr/local/bin/sqlite3:dbname=/Users/ankeet.presswala/Library/Group\ Containers/group.com.apple.notes/NoteStore.sqlite'
-let g:dbext_default_profile='Notes'
 
-" AirlineThemes that i like
-" - pink
-" hybrid base16
-" - bluegreen
-" lucius monochrome vice base16_londontube base16_shapeshifter cool
-" - red blue black
-" zenburn serene simple base16_google 
-" - brown grey blue
-" base16_mocha base16_summerfruit base16_tomorrow
-"
+" Dbext
+" Not currently used but I have this snippet to open Notes.app in vim
+" let g:dbext_default_profile_Notes = 'type=SQLITE:SQLITE_bin=/usr/local/bin/sqlite3:dbname=/Users/ankeet.presswala/Library/Group\ Containers/group.com.apple.notes/NoteStore.sqlite'
 
-let g:airline_theme = 'serene' 
-"let g:airline_theme = 'base16_tomorrow'
-augroup reload_vimrc " {
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }
-
-" Snippets
-"let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsSnippetsDir="~/.vim/bundle/vim-snippets"
-set runtimepath+="~/.vim/bundle/vim-snippets/snippets"
-
-set undofile
-set undodir=~/.vim/undodir
-
-let g:syntastic_python_python_exec = 'python3'
-
-" Clojure
-let g:rainbow_active = 1
-
-let g:tagbar_compact = 2
-
-
-" tidal
-autocmd FileType tidal setlocal commentstring=--\ %s
-
-" turn on autosave
-"  autocmd TextChanged,TextChangedI <buffer> silent write
-"
-highlight DiffAdd    cterm=NONE ctermfg=0 ctermbg=2
-highlight DiffDelete cterm=NONE ctermfg=0 ctermbg=1
-highlight DiffChange cterm=NONE ctermfg=0 ctermbg=6
-highlight DiffText   cterm=NONE ctermfg=0 ctermbg=6
-
-" sr writes file with sudo
-"nnoremap <leader>sr :w !sudo tee %<CR>
-
+" vim:set ft=vim et sw=2:
